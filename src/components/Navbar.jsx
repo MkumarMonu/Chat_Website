@@ -2,32 +2,75 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+  const isLogin = true;
   return (
-    <div className="navbar bg-blue-800 shadow-sm">
+    <div className="navbar bg-blue-800 shadow-sm fixed top-0">
       <div className="flex-1 flex justify-between">
         <div>
           <a className="btn btn-ghost text-xl">daisyUI</a>
         </div>
-        <div className=" flex  w-250 mr-2 justify-around ">
-          <Link to="/home">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="contactUs">Contact us</Link>
-        </div>
+        {/* <div>
+          {isLogin ? (
+            <div className="w-2xl  flex justify-end ">
+              <button className="btn btn-accent font-bold">
+                <Link to="/login" className="p-1 font-bold ">
+                  Login
+                </Link>
+              </button>
+              <button className="btn btn-accent font-bold">
+                <Link to="/signup">Signup</Link>
+              </button>
+            </div>
+          ) : (
+            <div className=" flex  w-250  justify-end ">
+              <Link to="/home">Home</Link>
+              <Link to="/about">About</Link>
+              <Link to="contactUs">Contact us</Link>
+            </div>
+          )}
+        </div> */}
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 w-4xl justify-between">
         {/* <input
           type="text"
           placeholder="Search"
           className="input input-bordered w-24 md:w-auto"
         /> */}
-        <div className="dropdown dropdown-end">
+
+        <div className="flex w-13/14 justify-between">
+          {isLogin ? (
+            <div className=" flex justify-end w-full ">
+              <button className="btn btn-accent font-bold mr-1.5">
+                <Link to="/login" className="p-1 font-bold ">
+                  Login
+                </Link>
+              </button>
+              <button className="btn btn-accent font-bold mr-2">
+                <Link to="/signup">Signup</Link>
+              </button>
+            </div>
+          ) : (
+            <div className=" flex justify-around w-full">
+              <Link to="/home" className=" text-2xl">
+                Home
+              </Link>
+              <Link to="/about" className=" text-2xl">
+                About
+              </Link>
+              <Link to="contactUs" className=" text-2xl">
+                Contact us
+              </Link>
+            </div>
+          )}
+        </div>
+        <div className="dropdown dropdown-end w-1/14 ">
           <div
             tabIndex={0}
             role="button"
             className="btn btn-ghost btn-circle avatar"
           >
-            <div className="w-10 rounded-full">
+            <div className="w-10 rounded-full mr-2 ">
               <img
                 alt="Tailwind CSS Navbar component"
                 src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Layout() {
+function Signup() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function Layout() {
   )
 }
 
-export default Layout
+export default Signup

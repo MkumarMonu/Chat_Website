@@ -1,16 +1,24 @@
 import { useState } from "react";
+import { loginUser } from "../api/service";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "monu@gmail.com",
+    password: "12345678",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Login Data:", formData);
+    await loginUser(formData);
+    navigate("/home");
   };
 
   return (
@@ -22,11 +30,17 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="relative">
             {/* <Mail className="absolute left-3 top-3 text-gray-400" /> */}
+            <label
+              htmlFor="email"
+              className="block text-gray-700 font-medium mb-1"
+            >
+              Email Address
+            </label>
             <input
               type="email"
               name="email"
-              placeholder="Email"
-              className="pl-10 w-full border border-gray-300 rounded-md py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="enter your Email"
+              className="pl-10 w-full border text-black border-gray-300 rounded-md py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               value={formData.email}
               onChange={handleChange}
               required
@@ -34,11 +48,17 @@ export default function LoginPage() {
           </div>
           <div className="relative">
             {/* <Lock className="absolute left-3 top-3 text-gray-400" /> */}
+            <label
+              htmlFor="email"
+              className="block text-gray-700 font-medium mb-1"
+            >
+              Password
+            </label>
             <input
               type="password"
               name="password"
               placeholder="Password"
-              className="pl-10 w-full border border-gray-300 rounded-md py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="pl-10 w-full border text-black border-gray-300 rounded-md py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               value={formData.password}
               onChange={handleChange}
               required
@@ -52,7 +72,7 @@ export default function LoginPage() {
           </button>
           <div className="text-center text-sm text-gray-500 mt-4">
             Don't have an account?{" "}
-            <a href="/register" className="text-indigo-500 hover:underline">
+            <a href="/signup" className="text-indigo-500 hover:underline">
               Register Now
             </a>
           </div>
