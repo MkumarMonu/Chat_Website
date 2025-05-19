@@ -1,8 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logoutUser } from "../features/auth/authSlice";
 
 function Navbar() {
-  const isLogin = true;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLogin = useSelector((state) => state.auth.user);
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate("/login");
+  };
   return (
     <div className="navbar bg-blue-800 shadow-sm fixed top-0">
       <div className="flex-1 flex justify-between">
@@ -39,18 +47,7 @@ function Navbar() {
         /> */}
 
         <div className="flex w-13/14 justify-between">
-          {isLogin ? (
-            <div className=" flex justify-end w-full ">
-              <button className="btn btn-accent font-bold mr-1.5">
-                <Link to="/login" className="p-1 font-bold ">
-                  Login
-                </Link>
-              </button>
-              <button className="btn btn-accent font-bold mr-2">
-                <Link to="/signup">Signup</Link>
-              </button>
-            </div>
-          ) : (
+          {isLogin !== null ? (
             <div className=" flex justify-around w-full">
               <Link to="/home" className=" text-2xl">
                 Home
@@ -61,6 +58,17 @@ function Navbar() {
               <Link to="contactUs" className=" text-2xl">
                 Contact us
               </Link>
+            </div>
+          ) : (
+            <div className=" flex justify-end w-full ">
+              <Link to="/login" className="p-1 font-bold ">
+                <button className="btn btn-accent font-bold mr-1.5">
+                  Login
+                </button>
+              </Link>
+              <button className="btn btn-accent font-bold mr-2">
+                <Link to="/signup">Signup</Link>
+              </button>
             </div>
           )}
         </div>
@@ -91,7 +99,7 @@ function Navbar() {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <button onClick={handleLogout}>Logout</button>
             </li>
           </ul>
         </div>

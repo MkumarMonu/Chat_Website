@@ -1,3 +1,7 @@
 @import "tailwindcss";
 
 @plugin "daisyui";
+
+.loader {
+  border-color: #ffffff transparent transparent transparent;
+}

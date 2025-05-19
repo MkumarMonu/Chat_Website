@@ -1,9 +1,18 @@
+// pages/LoginPage.jsx
 import { useState } from "react";
-import { loginUser } from "../api/service";
-import { useNavigate } from "react-router-dom";
+import { loginUser } from "../features/auth/authSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../components/Loader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
+
   const [formData, setFormData] = useState({
     email: "monu@gmail.com",
     password: "12345678",
@@ -16,9 +25,18 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login Data:", formData);
-    await loginUser(formData);
-    navigate("/home");
+
+    const result = await dispatch(loginUser(formData));
+    if (result.meta.requestStatus === "fulfilled") {
+      toast.success(
+        result?.payload?.message || "Login successful! Redirecting..."
+      );
+      navigate("/home");
+    } else {
+      toast.error(
+        result?.payload?.message || "Login failed. Please try again."
+      );
+    }
   };
 
   return (
@@ -27,9 +45,9 @@ export default function LoginPage() {
         <h2 className="text-3xl font-bold text-center mb-5 text-gray-800">
           Login to Chat
         </h2>
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="relative">
-            {/* <Mail className="absolute left-3 top-3 text-gray-400" /> */}
             <label
               htmlFor="email"
               className="block text-gray-700 font-medium mb-1"
@@ -39,17 +57,17 @@ export default function LoginPage() {
             <input
               type="email"
               name="email"
-              placeholder="enter your Email"
+              placeholder="Enter your Email"
               className="pl-10 w-full border text-black border-gray-300 rounded-md py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               value={formData.email}
               onChange={handleChange}
               required
             />
           </div>
+
           <div className="relative">
-            {/* <Lock className="absolute left-3 top-3 text-gray-400" /> */}
             <label
-              htmlFor="email"
+              htmlFor="password"
               className="block text-gray-700 font-medium mb-1"
             >
               Password
@@ -64,19 +82,30 @@ export default function LoginPage() {
               required
             />
           </div>
-          <button
-            type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-md"
-          >
-            Login
-          </button>
+
+          {loading ? (
+            <Loader />
+          ) : (
+            <button
+              type="submit"
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-md"
+            >
+              Login
+            </button>
+          )}
+
+          {error && <p className="text-red-500 text-center">{error}</p>}
+
           <div className="text-center text-sm text-gray-500 mt-4">
             Don't have an account?{" "}
-            <a href="/signup" className="text-indigo-500 hover:underline">
+            <Link href="/signup" className="text-indigo-500 hover:underline">
               Register Now
-            </a>
+            </Link>
           </div>
         </form>
+
+        {/* Toast Container */}
+        <ToastContainer position="top-right" autoClose={2000} />
       </div>
     </div>
   );
