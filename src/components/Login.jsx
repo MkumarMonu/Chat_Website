@@ -15,7 +15,7 @@ export default function LoginPage() {
 
   const [formData, setFormData] = useState({
     email: "monu@gmail.com",
-    password: "12345678",
+    password: "monu@123",
   });
 
   const handleChange = (e) => {

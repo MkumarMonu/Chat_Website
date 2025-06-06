@@ -2,7 +2,7 @@ import axios from "axios";
 export const loginUser = async (userData) => {
   try {
     const response = await axios.post(
-      `http://localhost:3000/api/v1/user/login`,
+      `https://chat-website-backend-tsau.onrender.com/3000/api/v1/user/login`,
       userData
     );
     if ((response?.data?.success = true)) {

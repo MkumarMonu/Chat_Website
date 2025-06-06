@@ -53,10 +53,10 @@ function Navbar() {
                 Home
               </Link>
               <Link to="/about" className=" text-2xl">
-                About
+                Check Requests
               </Link>
               <Link to="contactUs" className=" text-2xl">
-                Contact us
+                Connect with friends{" "}
               </Link>
             </div>
           ) : (

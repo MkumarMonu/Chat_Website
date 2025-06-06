@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Outlet, useNavigate } from "react-router-dom";
-import LoginPage from "./Login";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../features/auth/authSlice";
@@ -21,6 +20,7 @@ function Layout() {
         }
       );
       dispatch(addUser(response.data));
+      // navigate("/home");
       console.log(response.data.status);
     } catch (error) {
       if (error.status == 401) {
