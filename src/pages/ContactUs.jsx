@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import UserCard from "../components/userCard";
+import UserCard from "../components/UserCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUser } from "../features/auth/authSlice";
 import { sendRequestAPI } from "../features/sendRequest.js/requestApi";
