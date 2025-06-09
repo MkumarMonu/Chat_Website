@@ -1,9 +1,9 @@
-function UserCard({ username, email, apiFunction, request }) {
+function UserCard({ username, email, apiFunction, text }) {
   return (
     <div className="card card-dash bg-base-300 w-96 mt-18">
       <div className="card-body">
         <h2 className="card-title">
-          {request && <p>You got the request from</p>}
+          {text == "accept request" && <p>You got the request from</p>}
           {username.toUpperCase() || "No Username"}
         </h2>
         <h3>{email || "No email provided"}</h3>
@@ -14,7 +14,8 @@ function UserCard({ username, email, apiFunction, request }) {
               apiFunction();
             }}
           >
-            {request ? "accept request" : "Send Request"}
+            {/* {request ? "accept request" : "Send Request" || "chat"} */}
+            {text || "Chat"}
           </button>
         </div>
       </div>

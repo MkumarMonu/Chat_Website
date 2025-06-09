@@ -9,4 +9,7 @@ export const registerAPI = (userData) =>
 export const fetchUserApi = () => apiRequest("get", "/user/getUser");
 export const fetchAllUserApi = () =>
   apiRequest("get", `/user/getAllUser/${1}/${100}`);
+
+export const getYourConnections = () => apiRequest("get", `/user/connections`);
+
 export const logoutUserApi = () => apiRequest("post", "/user/logout");

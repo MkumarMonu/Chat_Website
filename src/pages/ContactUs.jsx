@@ -17,7 +17,6 @@ function ContactUs() {
 
   const handleSendrequest = async (status, userId) => {
     try {
-      console.log(userId);
       const response = await sendRequestAPI(status, userId);
       dispatch(fetchAllUser());
       if (response.success) {
@@ -38,6 +37,7 @@ function ContactUs() {
           key={user._id || index}
           username={user.username}
           email={user.email}
+          text={"send request"}
           apiFunction={() => handleSendrequest(status, user._id)}
           // toUserId={user._id}
         />

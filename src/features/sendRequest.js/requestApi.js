@@ -9,12 +9,12 @@ export const getRequestAPI = async () => {
 };
 
 export const acceptRequestAPI = async (requestId) => {
-  console.log(requestId, "req id from api");
   return await apiRequest(
     "post",
     `send/acceptOrRejectRequest/accepted/${requestId}`
   );
 };
+
 
 // export const loginAPI = (credentials) =>
 //   apiRequest("post", "/login", credentials);

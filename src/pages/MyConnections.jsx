@@ -1,11 +1,11 @@
-import UserCard from "../components/UserCard";
+// import UserCard from "../components/UserCard";
 
-function MyConnections() {
-  return (
-    <div>
-      <UserCard chat={chat} />
-    </div>
-  );
-}
+// function MyConnections() {
+//   return (
+//     <div>
+//       <UserCard chat={chat} />
+//     </div>
+//   );
+// }
 
-export default MyConnections;
+// export default MyConnections;
