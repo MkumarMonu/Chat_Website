@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import UserCard from "../components/userCard";
+import UserCard from "../components/UserCard.jsx";
 import { useSelector } from "react-redux";
 import { getYourConnections } from "../features/auth/authApi.js";
 
