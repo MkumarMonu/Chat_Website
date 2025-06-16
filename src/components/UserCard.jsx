@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function UserCard({ username, email, apiFunction, text }) {
   return (
     <div className="card card-dash bg-base-300 w-96 mt-18">
@@ -8,6 +10,7 @@ function UserCard({ username, email, apiFunction, text }) {
         </h2>
         <h3>{email || "No email provided"}</h3>
         <div className="card-actions justify-end">
+          {/* <Link to={text == "chat" ? "/chat" : "/"}> */}
           <button
             className="btn btn-primary"
             onClick={() => {
@@ -15,8 +18,9 @@ function UserCard({ username, email, apiFunction, text }) {
             }}
           >
             {/* {request ? "accept request" : "Send Request" || "chat"} */}
-            {text || "Chat"}
+            {text}
           </button>
+          {/* </Link> */}
         </div>
       </div>
     </div>

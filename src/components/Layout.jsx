@@ -39,10 +39,18 @@ function Layout() {
   }, []);
   // const isLoggedIn = false;
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+      }}
+    >
       <Navbar />
       {/* <h1>this is layout</h1> */}
-      <Outlet />
+      <div style={{ flex: 1, paddingTop: "60px" }}>
+        <Outlet />
+      </div>
       {/* {isLoggedIn ? <LoginPage /> : <h1>this is your dashboard</h1>} */}
       <Footer />
     </div>
