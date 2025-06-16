@@ -48,35 +48,31 @@ function Chat() {
   }, [userId, targetUserId]);
 
   return (
-    <div className="w-full  bg-amber-600 mt-3 flex justify-center">
-      <div className="w-1/2 h-[80vh] bg-amber-300 ">
-        <div className="chat chat-start">
-          <div className="chat-bubble chat-bubble-primary">
-            What kind of nonsense is this
-          </div>
-        </div>
-        <div className="chat chat-start">
-          <div className="chat-bubble chat-bubble-secondary">
-            Put me on the Council and not make me a Master!??
-          </div>
-        </div>
-        {messages?.map((value, index) => {
-          return (
-            <div key={index} className="chat chat-end">
-              <div className="chat-bubble chat-bubble-warning">
-                {value?.message}
+    <div className="w-full h-screen bg-gray-100 flex flex-col items-center p-4">
+      <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-4 flex flex-col justify-between h-[80vh]">
+        {/* Message Area */}
+        <div className="flex-1 overflow-y-auto space-y-2">
+          {messages.map((msg, index) => {
+            const isSentByUser = msg.senderId === userId;
+            return (
+              <div
+                key={index}
+                className={`chat ${isSentByUser ? "chat-end" : "chat-start"}`}
+              >
+                <div
+                  className={`chat-bubble ${
+                    isSentByUser ? "chat-bubble-success" : "chat-bubble-primary"
+                  }`}
+                >
+                  {msg.message}
+                </div>
               </div>
-            </div>
-          );
-        })}
-
-        <div className="chat chat-end">
-          <div className="chat-bubble chat-bubble-error">
-            It's never happened before.
-          </div>
+            );
+          })}
         </div>
 
-        <div className="flex gap-2 fixed bottom-44 ">
+        {/* Input Area */}
+        <div className="flex gap-2 pt-4">
           <input
             type="text"
             className="input input-bordered w-full"
@@ -85,7 +81,7 @@ function Chat() {
             placeholder="Type your message..."
           />
           <button
-            className="btn btn-primary min-w-28"
+            className="btn btn-primary min-w-24"
             onClick={handleSendMessage}
           >
             Send
