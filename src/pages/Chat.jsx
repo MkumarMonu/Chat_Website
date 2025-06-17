@@ -14,12 +14,11 @@ function Chat() {
 
   const handleSendMessage = () => {
     if (message.trim() === "") return;
-    console.log("✅ Socket connected?", socket.connected); // should be true
+    // console.log("✅ Socket connected?", socket.connected);
 
     socket.emit("sendMessage", senderName, userId, message, targetUserId);
-    console.log("📤 Sent:", message);
 
-    setMessages((prev) => [...prev, { senderId: userId, message }]);
+    // setMessages((prev) => [...prev, { senderId: userId, message }]);
     setMessage("");
   };
 
@@ -31,11 +30,22 @@ function Chat() {
 
     socket.emit("joinChat", senderName, userId, targetUserId);
 
+    // const handleMessageReceived = (data) => {
+    //   console.log("📩 Message received:", data);
+    //   setMessages((prev) => [
+    //     ...prev,
+    //     { senderId: data.senderId, message: data.message },
+    //   ]);
+    // };
+
     const handleMessageReceived = (data) => {
-      console.log("📩 Message received:", data.message);
       setMessages((prev) => [
         ...prev,
-        { senderId: targetUserId, message: data.message },
+        {
+          senderId: data.senderId,
+          message: data.message,
+          senderName: data.senderName,
+        },
       ]);
     };
 
@@ -55,10 +65,13 @@ function Chat() {
           {messages.map((msg, index) => {
             const isSentByUser = msg.senderId === userId;
             return (
-              <div
-                key={index}
+              <div key={index}
                 className={`chat ${isSentByUser ? "chat-end" : "chat-start"}`}
               >
+                <div className="chat-header text-green-500">
+                  {isSentByUser ? "You" : msg.senderName}
+                  <time className="text-xs opacity-50 ml-2">12:45</time>
+                </div>
                 <div
                   className={`chat-bubble ${
                     isSentByUser ? "chat-bubble-success" : "chat-bubble-primary"

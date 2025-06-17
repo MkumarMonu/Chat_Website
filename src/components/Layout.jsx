@@ -13,9 +13,9 @@ function Layout() {
 
   const fetchUser = async () => {
     try {
-      // "http://localhost:3000/api/v1/user/getUser",
       const response = await axios.get(
-        "https://chat-website-backend-tsau.onrender.com/api/v1/user/getUser",
+        "http://localhost:3000/api/v1/user/getUser",
+        // "https://chat-website-backend-tsau.onrender.com/api/v1/user/getUser",
         {
           withCredentials: true,
         }
