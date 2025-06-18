@@ -1,5 +1,7 @@
 // features/auth/authAPI.js
-import { apiRequest } from "../../../services/requestHandler";
+// import { apiRequest } from "../../services/requestHandler";
+
+import { apiRequest } from "../../services/requestHandler.js";
 
 export const loginAPI = (credentials) =>
   apiRequest("post", "/user/login", credentials);
