@@ -20,9 +20,12 @@ function Layout() {
           withCredentials: true,
         }
       );
-      dispatch(addUser(response.data));
-      // navigate("/home");
-      console.log(response.data.status);
+      if (response.data.success) {
+        dispatch(addUser(response.data));
+        navigate("/home");
+      } else {
+        navigate("/login");
+      }
     } catch (error) {
       if (error.status == 401) {
         navigate("/login");

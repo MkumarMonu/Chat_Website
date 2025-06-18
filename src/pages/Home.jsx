@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import UserCard from "../components/UserCard.jsx";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { getYourConnections } from "../features/auth/authApi.js";
 import { useNavigate } from "react-router-dom";
-import { socket } from "../../socket.js";
+import { toast } from "react-toastify";
 
 function Home() {
   const navigate = useNavigate();
@@ -14,8 +14,12 @@ function Home() {
   const getconnections = async () => {
     try {
       const response = await getYourConnections();
-      console.log(response.data);
-      setConnections(response.data);
+      if (response.success) {
+        setConnections(response.data);
+        toast.success(response.message||"Your all friend fetched successgully!")
+      }else{
+        toast.error(response.message||"Failed to fetch your friend")
+      }
     } catch (error) {
       console.log(error);
     }
