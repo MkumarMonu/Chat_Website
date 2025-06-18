@@ -64,12 +64,12 @@ function Chat() {
   }, [userId, targetUserId]);
 
   return (
-    <div className="flex justify-center   max-w-3xl mx-auto my-5 bg-white shadow rounded-lg flex-col  h-[80vh]">
+    <div className="flex justify-center   max-w-3xl mx-auto my-5 bg-gray-300 shadow rounded-lg flex-col  h-[80vh]">
       <div className="flex flex-col w-full h-full">
         <div className="bg-blue-600 text-white text-xl font-semibold py-3 px-5 rounded-t-lg ">
           Chat with {chatWithUser}
         </div>
-        <div className="flex-1 overflow-y-auto px-4 py-2 space-y-3 mt-2 bg-gray-50">
+        <div className="flex-1 overflow-y-auto px-4 py-2 space-y-3 mt-2">
           {messages.map((msg, index) => {
             const isSentByUser = msg.senderId === userId;
             return (
@@ -96,7 +96,7 @@ function Chat() {
         <div className="border-t p-3 flex gap-2">
           <input
             type="text"
-            className="input input-bordered w-full"
+            className="input input-bordered w-full bg-gray-600 text-white"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type your message..."
