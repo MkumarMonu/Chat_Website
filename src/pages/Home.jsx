@@ -24,12 +24,9 @@ function Home() {
     getconnections();
   }, []);
 
-  const connectToUser = async (targetUserId) => {
-    // if (!socket.connected) {
-    //   socket.connect(); // Only if you're using manual connection
-    // }
+  const connectToUser = async (targetUserId, chatWithUser) => {
     console.log("Connected to the server");
-    navigate(`/chat/${targetUserId}`);
+    navigate(`/chat/${targetUserId}/${chatWithUser}`);
   };
   return (
     <div className="flex flex-wrap gap-4 p-4">
@@ -41,7 +38,7 @@ function Home() {
             email={value.email}
             text={"chat"}
             apiFunction={() => {
-              connectToUser(value?._id);
+              connectToUser(value?._id, value?.username);
             }}
           />
         </div>

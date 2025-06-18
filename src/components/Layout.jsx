@@ -14,8 +14,8 @@ function Layout() {
   const fetchUser = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/v1/user/getUser",
-        // "https://chat-website-backend-tsau.onrender.com/api/v1/user/getUser",
+        // "http://localhost:3000/api/v1/user/getUser",
+        "https://chat-website-backend-tsau.onrender.com/api/v1/user/getUser",
         {
           withCredentials: true,
         }
@@ -33,27 +33,22 @@ function Layout() {
 
   useEffect(() => {
     if (!user) {
-      // const response = dispatch(fetchUser());
-      // console.log("response//////////", response);
       fetchUser();
     }
   }, []);
-  // const isLoggedIn = false;
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100vh",
-      }}
-    >
-      <Navbar />
-      {/* <h1>this is layout</h1> */}
-      <div style={{ flex: 1, paddingTop: "60px" }}>
-        <Outlet />
+    <div className="flex flex-col min-h-screen">
+      <div className="fixed top-0 left-0 w-full z-50">
+        <Navbar />
       </div>
-      {/* {isLoggedIn ? <LoginPage /> : <h1>this is your dashboard</h1>} */}
-      <Footer />
+
+      <main className="flex-1 mt-[64px] mb-[64px] overflow-y-auto px-4">
+        <Outlet />
+      </main>
+
+      <div className="fixed bottom-0 left-0 w-full z-50">
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -12,8 +12,6 @@ import Chat from "./pages/Chat";
 function App() {
   return (
     <>
-      {/* <Navbar /> */}
-      {/* <Login /> */}
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -31,7 +29,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contactUs" element={<ContactUs />} />
-          <Route path="/chat/:targetUserId" element={<Chat />} />
+          <Route path="/chat/:targetUserId/:chatWithUser" element={<Chat />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Route>
