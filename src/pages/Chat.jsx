@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Socket } from "socket.io-client";
 import { socket } from "../../socket.js";
+import { getChatApi } from "../features/chatApi/chatApi.js";
 
 function Chat() {
   const { targetUserId } = useParams();
@@ -11,32 +11,43 @@ function Chat() {
   const user = useSelector((state) => state.auth.user);
   const userId = user?.user?._id;
   const senderName = user?.user?.username;
-
+  const messagesEndRef = useRef(null);
   const handleSendMessage = () => {
     if (message.trim() === "") return;
     // console.log("✅ Socket connected?", socket.connected);
 
     socket.emit("sendMessage", senderName, userId, message, targetUserId);
 
-    // setMessages((prev) => [...prev, { senderId: userId, message }]);
     setMessage("");
   };
 
+  const getChatHistory = async () => {
+    try {
+      const response = await getChatApi(targetUserId);
+      setMessages(
+        response.messages.map((msg) => ({
+          senderId: msg.senderId._id,
+          senderName: msg.senderId.username,
+          message: msg.message,
+        }))
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  useEffect(() => {
+    getChatHistory();
     if (!userId || !targetUserId) return;
 
     // Connect only if not already connected
     if (!socket.connected) socket.connect();
 
     socket.emit("joinChat", senderName, userId, targetUserId);
-
-    // const handleMessageReceived = (data) => {
-    //   console.log("📩 Message received:", data);
-    //   setMessages((prev) => [
-    //     ...prev,
-    //     { senderId: data.senderId, message: data.message },
-    //   ]);
-    // };
 
     const handleMessageReceived = (data) => {
       setMessages((prev) => [
@@ -61,11 +72,18 @@ function Chat() {
     <div className="w-full h-screen bg-gray-100 flex flex-col items-center p-4">
       <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-4 flex flex-col justify-between h-[80vh]">
         {/* Message Area */}
-        <div className="flex-1 overflow-y-auto space-y-2">
-          {messages.map((msg, index) => {
-            const isSentByUser = msg.senderId === userId;
+        {/* <div className="flex-1 overflow-y-auto space-y-2">
+          {messages?.map((msg, index) => {
+            {
+              console.log(msg.senderId, "and user id is :", userId);
+            }
+            const isSentByUser = msg.senderId?.toString() === userId.toString();
+            {
+              console.log(isSentByUser, "is sent by user");
+            }
             return (
-              <div key={index}
+              <div
+                key={index}
                 className={`chat ${isSentByUser ? "chat-end" : "chat-start"}`}
               >
                 <div className="chat-header text-green-500">
@@ -82,6 +100,33 @@ function Chat() {
               </div>
             );
           })}
+        </div> */}
+        <div className="flex-1 overflow-y-auto space-y-2">
+          {messages.map((msg, index) => {
+            const isSentByUser = msg.senderId === userId;
+
+            return (
+              <div
+                key={index}
+                className={`chat ${isSentByUser ? "chat-end" : "chat-start"}`}
+              >
+                <div className="chat-header text-green-500">
+                  {isSentByUser ? "You" : msg.senderName}
+                  <time className="text-xs opacity-50 ml-2">12:45</time>
+                </div>
+                <div
+                  className={`chat-bubble ${
+                    isSentByUser ? "chat-bubble-success" : "chat-bubble-primary"
+                  }`}
+                >
+                  {msg.message}
+                </div>
+              </div>
+            );
+          })}
+
+          {/* 👇 Scroll target */}
+          <div ref={messagesEndRef} />
         </div>
 
         {/* Input Area */}
