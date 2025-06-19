@@ -56,11 +56,11 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.registerError = action.error.message;
       })
       .addCase(fetchUser.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.registerError = null;
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.loading = false;

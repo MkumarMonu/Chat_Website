@@ -45,7 +45,7 @@ function Layout() {
         <Navbar />
       </div>
 
-      <main className="flex-1 mt-[64px] mb-[64px] overflow-y-auto px-4 bg-blue-200">
+      <main className="flex-1 mt-[64px] mb-[64px] overflow-y-auto bg-blue-200">
         <Outlet />
       </main>
 

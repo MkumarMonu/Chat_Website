@@ -14,8 +14,8 @@ export default function LoginPage() {
   const { loading, error } = useSelector((state) => state.auth);
 
   const [formData, setFormData] = useState({
-    email: "monu@gmail.com",
-    password: "monu@123",
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -40,8 +40,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-500 to-indigo-600">
-      <div className="w-full max-w-md p-8 bg-white shadow-2xl rounded-2xl">
+    <div className="flex items-center justify-center h-[80vh] m-5 ">
+      <div className="w-full max-w-md p-8 bg-green-100 shadow-2xl rounded-2xl">
         <h2 className="text-3xl font-bold text-center mb-5 text-gray-800">
           Login to Chat
         </h2>
@@ -58,7 +58,7 @@ export default function LoginPage() {
               type="email"
               name="email"
               placeholder="Enter your Email"
-              className="pl-10 w-full border text-black border-gray-300 rounded-md py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="pl-2 w-full border text-black border-gray-300 rounded-md py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               value={formData.email}
               onChange={handleChange}
               required
@@ -76,7 +76,7 @@ export default function LoginPage() {
               type="password"
               name="password"
               placeholder="Password"
-              className="pl-10 w-full border text-black border-gray-300 rounded-md py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className=" pl-2 w-full border text-black border-gray-300 rounded-md py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               value={formData.password}
               onChange={handleChange}
               required
@@ -98,7 +98,7 @@ export default function LoginPage() {
 
           <div className="text-center text-sm text-gray-500 mt-4">
             Don't have an account?{" "}
-            <Link href="/signup" className="text-indigo-500 hover:underline">
+            <Link to="/signup" className="text-indigo-500 hover:underline">
               Register Now
             </Link>
           </div>
