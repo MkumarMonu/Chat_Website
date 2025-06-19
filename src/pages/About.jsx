@@ -28,7 +28,7 @@ function About() {
       if (response.success) {
         toast.success(response.message);
         await fetchAllRequest();
-        await dispatch(getConnectios())
+        await dispatch(getConnectios());
       } else {
         toast.error(response.message);
       }
@@ -41,16 +41,15 @@ function About() {
   return (
     <div className="flex flex-wrap gap-4 p-4">
       {requests?.map((value, index) => (
-        <div key={index}>
-          <UserCard
-            email={value?.fromUser?.email}
-            username={value?.fromUser?.username}
-            text={"accept request"}
-            apiFunction={() => {
-              handleAcceptRequest(value?._id);
-            }}
-          />
-        </div>
+        <UserCard
+          email={value?.fromUser?.email}
+          key={index}
+          username={value?.fromUser?.username}
+          text={"accept request"}
+          apiFunction={() => {
+            handleAcceptRequest(value?._id);
+          }}
+        />
       ))}
     </div>
   );

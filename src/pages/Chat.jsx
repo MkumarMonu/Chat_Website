@@ -64,8 +64,8 @@ function Chat() {
   }, [userId, targetUserId]);
 
   return (
-    <div className="flex justify-center   max-w-3xl mx-auto my-5 bg-gray-300 shadow rounded-lg flex-col  h-[80vh]">
-      <div className="flex flex-col w-full h-full">
+    <div className="flex  sm:mx-4 md:mx-auto lg:mx-auto m-5  bg-gray-800 shadow rounded-lg flex-col xs:w-[30%] sm:w-[65%] md:w-[70%] lg:w-[70%] xl:w-[35%] h-[75vh] sm:h-[70vh] md:h-[75vh] lg:h-[80vh]">
+      <div className="flex flex-col w-full h-full ">
         <div className="bg-blue-600 text-white text-xl font-semibold py-3 px-5 rounded-t-lg ">
           Chat with {chatWithUser}
         </div>

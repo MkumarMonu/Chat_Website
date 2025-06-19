@@ -16,17 +16,17 @@ function Home() {
   ); // ✅ get from redux
 
   useEffect(() => {
-    if (!connections || connections.length === 0) {
-      dispatch(getConnectios())
-        .unwrap()
-        .then((res) => {
-          toast.success(res.message || "Connections fetched successfully!");
-        })
-        .catch((err) => {
-          toast.error(err.message || "Failed to fetch connections");
-        });
-    }
-  }, [dispatch, connections]);
+    // if (!connections || connections.length === 0) {
+    dispatch(getConnectios())
+      .unwrap()
+      .then((res) => {
+        toast.success(res.message || "Connections fetched successfully!");
+      })
+      .catch((err) => {
+        toast.error(err.message || "Failed to fetch connections");
+      });
+    // }
+  }, [dispatch]);
 
   const connectToUser = async (targetUserId, chatWithUser) => {
     console.log("Connected to the server");
@@ -36,16 +36,15 @@ function Home() {
     <div className="flex flex-wrap gap-4 p-4">
       {/* <UserCard /> */}
       {connections?.map((value, index) => (
-        <div key={index}>
-          <UserCard
-            username={value.username}
-            email={value.email}
-            text={"chat"}
-            apiFunction={() => {
-              connectToUser(value?._id, value?.username);
-            }}
-          />
-        </div>
+        <UserCard
+          username={value.username}
+          key={value._id || index}
+          email={value.email}
+          text={"chat"}
+          apiFunction={() => {
+            connectToUser(value?._id, value?.username);
+          }}
+        />
       ))}
     </div>
     // <div className="mt-10">this is home page</div>

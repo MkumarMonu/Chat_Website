@@ -50,7 +50,7 @@ function Navbar() {
 
       {/* Right: Avatar and Dropdown */}
       {isLogin && (
-        <div className="dropdown dropdown-end ml-2">
+        <div className="dropdown dropdown-end ml-2 ">
           <div
             tabIndex={0}
             role="button"
