@@ -5,6 +5,7 @@ import {
   getRequestAPI,
 } from "../features/sendRequest.js/requestApi";
 import { toast } from "react-toastify";
+import { getConnectios } from "../features/connectionApi/connectionApiSlice";
 
 function About() {
   const [requests, setRequests] = useState([]);
@@ -27,6 +28,7 @@ function About() {
       if (response.success) {
         toast.success(response.message);
         await fetchAllRequest();
+        await dispatch(getConnectios())
       } else {
         toast.error(response.message);
       }
