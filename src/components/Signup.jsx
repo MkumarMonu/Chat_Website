@@ -30,6 +30,7 @@ function Signup() {
     if (result.type === "auth/registerUser/fulfilled") {
       if (result.payload?.success) {
         toast.success(result.payload.message || "Register successful!");
+        navigate("login");
       } else {
         toast.error(result.payload?.message || "Registration failed.");
       }

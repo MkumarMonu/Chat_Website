@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 
 export default function LoginPage() {
   const navigate = useNavigate();

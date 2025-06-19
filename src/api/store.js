@@ -1,21 +1,14 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// import authReducer from "../../features/auth/authSlice";
-
-// export default configureStore({
-//   // reducer: {},
-//   auth: authReducer,
-// });
-
-// app/store.js
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import authReducer from "../features/auth/authSlice"; // Import your slices here
+import authReducer from "../features/auth/authSlice";
+import connectionReducer from "../features/connectionApi/connectionApiSlice";
 
 const rootReducer = combineReducers({
-  auth: authReducer, // Add more reducers as needed
+  auth: authReducer,
+  connections: connectionReducer,
 });
 
 const store = configureStore({
-  reducer: rootReducer, // Combine and configure in the same file
+  reducer: rootReducer,
 });
 
 export default store;

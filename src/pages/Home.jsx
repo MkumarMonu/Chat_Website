@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from "react";
 import UserCard from "../components/UserCard.jsx";
-import { useSelector } from "react-redux";
-import { getYourConnections } from "../features/auth/authApi.js";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { getConnectios } from "../features/connectionApi/connectionApiSlice.js";
 
 function Home() {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user?.user);
 
-  const [connections, setConnections] = useState([]);
-  const getconnections = async () => {
-    try {
-      const response = await getYourConnections();
-      if (response.success) {
-        setConnections(response.data);
-        toast.success(response.message||"Your all friend fetched successgully!")
-      }else{
-        toast.error(response.message||"Failed to fetch your friend")
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const [connections, setConnections] = useState([]);
+  const { connections, loading, error } = useSelector(
+    (state) => state.connections
+  ); // ✅ get from redux
+
   useEffect(() => {
-    getconnections();
-  }, []);
+    if (!connections || connections.length === 0) {
+      dispatch(getConnectios())
+        .unwrap()
+        .then((res) => {
+          toast.success(res.message || "Connections fetched successfully!");
+        })
+        .catch((err) => {
+          toast.error(err.message || "Failed to fetch connections");
+        });
+    }
+  }, [dispatch, connections]);
 
   const connectToUser = async (targetUserId, chatWithUser) => {
     console.log("Connected to the server");
@@ -35,7 +35,7 @@ function Home() {
   return (
     <div className="flex flex-wrap gap-4 p-4">
       {/* <UserCard /> */}
-      {connections.map((value, index) => (
+      {connections?.map((value, index) => (
         <div key={index}>
           <UserCard
             username={value.username}
