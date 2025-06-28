@@ -1,12 +1,44 @@
-# React + Vite
+# 🔐 ChatConnect - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **frontend** of a real-time chat application that implements **Authentication & Authorization** using **JWT**. Users can sign up, log in, and chat with their friends in real time using **Socket.IO**.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🔒 User authentication with JWT
+- 🔐 Role-based authorization
+- 💬 Real-time chat using `socket.io-client`
+- 👥 Chat with friends (1-to-1 messaging)
+- 📦 RESTful API integration
+- 🔄 Token-based protected routes
+- 🔄 Auto-login via token persistence
+- ⚙️ Responsive UI 
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend Framework:** ReactJS 
+- **Authentication:** JWT (JSON Web Token)
+- **Real-time Communication:** Socket.IO (`socket.io-client`)
+- **State Management:** (Redux )
+- **Routing:** React Router
+- **Styling:** (Tailwind CSS / CSS Modules 
+- **API Integration:** Axios or Fetch
+
+
+## 🔐 Authentication Flow
+
+1. User signs up / logs in.
+2. Backend returns a JWT token on successful login.
+3. Token is saved to  `cookies`.
+4. Socket connection is established **after** authentication.
+
+## 🔌 Real-time Chat with Socket.IO
+
+- Uses `socket.io-client` to connect to the backend server.
+- A user can send and receive real-time messages.
+- All chat events are handled through socket listeners.
+- Socket is initialized only after successful login.
+
+
+
+
+
