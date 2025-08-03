@@ -6,9 +6,11 @@ import {
 } from "../features/sendRequest.js/requestApi";
 import { toast } from "react-toastify";
 import { getConnectios } from "../features/connectionApi/connectionApiSlice";
+import { useSelector } from "react-redux";
 
 function About() {
   const [requests, setRequests] = useState([]);
+  const user = useSelector((state) => state.auth?.user);
   const fetchAllRequest = async () => {
     try {
       const response = await getRequestAPI();
@@ -22,6 +24,7 @@ function About() {
     fetchAllRequest();
   }, []);
 
+  console.log("request formt the about page :", requests);
   const handleAcceptRequest = async (requestId) => {
     try {
       const response = await acceptRequestAPI(requestId);
@@ -40,17 +43,26 @@ function About() {
 
   return (
     <div className="flex flex-wrap gap-4 p-4">
-      {requests?.map((value, index) => (
-        <UserCard
-          email={value?.fromUser?.email}
-          key={index}
-          username={value?.fromUser?.username}
-          text={"accept request"}
-          apiFunction={() => {
-            handleAcceptRequest(value?._id);
-          }}
-        />
-      ))}
+      {requests?.length !== 0 ? (
+        requests?.map((value, index) => (
+          <UserCard
+            email={value?.fromUser?.email}
+            key={index}
+            username={value?.fromUser?.username}
+            text={"accept request"}
+            apiFunction={() => {
+              handleAcceptRequest(value?._id);
+            }}
+          />
+        ))
+      ) : (
+        <div className="flex justify-center items-center w-full h-72">
+          <h1 className="text-black font-semibold text-3xl text-center">
+            `<span className="text-red-600 text-4xl">{user?.username}</span> ,
+            You have no any request till now!`
+          </h1>
+        </div>
+      )}
     </div>
   );
 }

@@ -4,16 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getConnectios } from "../features/connectionApi/connectionApiSlice.js";
+import { h1 } from "framer-motion/client";
 
 function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user?.user);
-
+  const user = useSelector((state) => state.auth?.user);
+  // console.log(user);
   // const [connections, setConnections] = useState([]);
   const { connections, loading, error } = useSelector(
     (state) => state.connections
-  ); // ✅ get from redux
+  );
 
   useEffect(() => {
     // if (!connections || connections.length === 0) {
@@ -34,18 +35,26 @@ function Home() {
   };
   return (
     <div className="flex flex-wrap gap-4 p-4">
-      {/* <UserCard /> */}
-      {connections?.map((value, index) => (
-        <UserCard
-          username={value.username}
-          key={value._id || index}
-          email={value.email}
-          text={"chat"}
-          apiFunction={() => {
-            connectToUser(value?._id, value?.username);
-          }}
-        />
-      ))}
+      {connections?.length !== 0 ? (
+        connections?.map((value, index) => (
+          <UserCard
+            username={value.username}
+            key={value._id || index}
+            email={value.email}
+            text={"chat"}
+            apiFunction={() => {
+              connectToUser(value?._id, value?.username);
+            }}
+          />
+        ))
+      ) : (
+        <div className="flex justify-center items-center w-full h-72">
+          <h1 className="text-black font-semibold text-3xl text-center">
+            `<span className="text-red-600 text-4xl">{user?.username}</span> ,
+            You have no any connection till now!`
+          </h1>
+        </div>
+      )}
     </div>
     // <div className="mt-10">this is home page</div>
   );

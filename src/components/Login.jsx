@@ -1,11 +1,12 @@
 // pages/LoginPage.jsx
 import { useState } from "react";
-import { loginUser } from "../features/auth/authSlice";
+import { addUser, loginUser } from "../features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { fetchUserApi } from "../features/auth/authApi";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -26,9 +27,14 @@ export default function LoginPage() {
     e.preventDefault();
 
     const result = await dispatch(loginUser(formData));
+
+    const response = await fetchUserApi();
+    if (response?.success) {
+      dispatch(addUser(response.user));
+    }
     if (result.meta.requestStatus === "fulfilled") {
       toast.success(
-        result?.payload?.message || "Login successful! Redirecting..."
+        result?.payload?.message || "Login successfully Redirecting..."
       );
       navigate("/home");
     } else {

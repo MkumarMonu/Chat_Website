@@ -1,17 +1,16 @@
 import axios from "axios";
-export const loginUser = async (userData) => {
+import { fetchUserApi } from "../features/auth/authApi";
+import { addUser } from "../features/auth/authSlice";
+import { useDispatch } from "react-redux";
+
+export const fetchUserService = async () => {
   try {
-    const response = await axios.post(
-      `https://chat-website-backend-tsau.onrender.com/3000/api/v1/user/login`,
-      userData
-    );
-    if ((response?.data?.success = true)) {
-      alert(`${response.data.message}`);
-    } else {
-      alert(`${response.data.message}`);
+    const response = await fetchUserApi();
+
+    if (response?.success) {
+      await useDispatch(addUser(response?.user));
     }
   } catch (error) {
     console.log(error);
-    // alert(`${response.message}`);
   }
 };

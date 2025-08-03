@@ -1,16 +1,16 @@
 import { io } from "socket.io-client";
 
-// export const socket = io("http://localhost:3000", {
-//   transports: ["websocket"],
-//   reconnectionAttempts: 5,
-//   timeout: 5000,
-// });
-
-export const socket = io("https://chat-website-backend-tsau.onrender.com", {
+export const socket = io("http://localhost:3000", {
   transports: ["websocket"],
-  withCredentials: true,
-  autoConnect: false,
+  reconnectionAttempts: 5,
+  timeout: 5000,
 });
+
+// export const socket = io("https://chat-website-backend-tsau.onrender.com", {
+//   transports: ["websocket"],
+//   withCredentials: true,
+//   autoConnect: false,
+// });
 
 // export const chatWithUser = socket.on("connect", (userId, targetUserId) => {
 //   console.log("✅ Connected to server");

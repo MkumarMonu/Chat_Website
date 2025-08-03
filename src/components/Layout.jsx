@@ -5,6 +5,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../features/auth/authSlice";
+import { fetchUserApi } from "../features/auth/authApi";
 
 function Layout() {
   const navigate = useNavigate();
@@ -13,23 +14,19 @@ function Layout() {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get(
-        // "http://localhost:3000/api/v1/user/getUser",
-        "https://chat-website-backend-tsau.onrender.com/api/v1/user/getUser",
-        {
-          withCredentials: true,
-        }
-      );
-      if (response.data.success) {
-        dispatch(addUser(response.data));
-        navigate("/home");
+      const response = await fetchUserApi();
+
+      if (response?.success) {
+        dispatch(addUser(response.user));
+        // navigate("/home");
       } else {
         navigate("/login");
       }
     } catch (error) {
-      if (error.status == 401) {
-        navigate("/login");
-      }
+      // if (error.status == 401) {
+      //   navigate("/login");
+      // }
+      navigate("/login");
       console.log(error.status);
     }
   };
@@ -38,7 +35,7 @@ function Layout() {
     if (!user) {
       fetchUser();
     }
-  }, []);
+  }, [user]);
   return (
     <div className="flex flex-col min-h-screen">
       <div className="fixed top-0 left-0 w-full z-50">

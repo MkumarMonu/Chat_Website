@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { loginUser, registerUser } from "../features/auth/authSlice";
+import { addUser, loginUser, registerUser } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { fetchUserApi } from "../features/auth/authApi";
 function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,7 +31,11 @@ function Signup() {
     if (result.type === "auth/registerUser/fulfilled") {
       if (result.payload?.success) {
         toast.success(result.payload.message || "Register successful!");
-        navigate("login");
+        navigate("/home");
+        const response = await fetchUserApi();
+        if (response?.success) {
+          dispatch(addUser(response.user));
+        }
       } else {
         toast.error(result.payload?.message || "Registration failed.");
       }
