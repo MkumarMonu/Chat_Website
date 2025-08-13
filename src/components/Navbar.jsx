@@ -14,7 +14,7 @@ function Navbar() {
   };
 
   return (
-    <div className="navbar bg-blue-900 text-white px-4 shadow-sm h-14">
+    <div className="navbar bg-blue-900 text-white px-4 lg:px-10 shadow-sm h-14">
       {/* Left: Brand */}
       <div className="flex-1">
         <Link className="text-2xl font-bold" to="/home">

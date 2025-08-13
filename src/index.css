@@ -5,3 +5,7 @@
 .loader {
   border-color: #ffffff transparent transparent transparent;
 }
+
+*{
+  font-style:  serif sans;
+}

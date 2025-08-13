@@ -1,7 +1,14 @@
 import React from "react";
 
-function HighlightText({ text }) {
-  return <span className="text-2xl text-red-600">{text}</span>;
+function HighlightText({ text, textColor }) {
+  return (
+    <span
+      style={{ color: textColor }}
+      className={`text-2xl font-serif font-bold`}
+    >
+      {text}
+    </span>
+  );
 }
 
 export default HighlightText;
