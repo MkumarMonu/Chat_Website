@@ -14,7 +14,7 @@ function Navbar() {
   };
 
   return (
-    <div className="navbar bg-blue-800 text-white px-4 shadow-sm">
+    <div className="navbar bg-blue-900 text-white px-4 shadow-sm h-14">
       {/* Left: Brand */}
       <div className="flex-1">
         <Link className="text-2xl font-bold" to="/home">
@@ -29,10 +29,10 @@ function Navbar() {
             <Link to="/home" className="hover:text-gray-300">
               Home
             </Link>
-            <Link to="/about" className="hover:text-gray-300">
+            <Link to="/check-request" className="hover:text-gray-300">
               Check Requests
             </Link>
-            <Link to="/contactUs" className="hover:text-gray-300">
+            <Link to="/connect-with-friends" className="hover:text-gray-300">
               Connect with friends
             </Link>
           </>
@@ -108,10 +108,10 @@ function Navbar() {
                 <Link to="/home">Home</Link>
               </li>
               <li>
-                <Link to="/about">Check Requests</Link>
+                <Link to="/check-request">Check Requests</Link>
               </li>
               <li>
-                <Link to="/contactUs">Connect with friends</Link>
+                <Link to="/connect-with-friends">Connect with friends</Link>
               </li>
               <li>
                 <button onClick={handleLogout}>Logout</button>

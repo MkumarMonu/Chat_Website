@@ -8,10 +8,11 @@ import Layout from "./components/Layout";
 import Signup from "./components/Signup";
 import { ToastContainer } from "react-toastify";
 import Chat from "./pages/Chat";
+import Default from "./pages/Default";
 
 function App() {
   return (
-    <>
+    <div className="w-screen min-h-screen overflow-x-hidden">
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -26,16 +27,17 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Default />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contactUs" element={<ContactUs />} />
+          <Route path="/check-request" element={<About />} />
+          <Route path="/connect-with-friends" element={<ContactUs />} />
           <Route path="/chat/:targetUserId/:chatWithUser" element={<Chat />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Route>
       </Routes>
       {/* <Footer /> */}
-    </>
+    </div>
   );
 }
 

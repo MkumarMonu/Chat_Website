@@ -20,13 +20,13 @@ function Layout() {
         dispatch(addUser(response.user));
         // navigate("/home");
       } else {
-        navigate("/login");
+        navigate("/");
       }
     } catch (error) {
       // if (error.status == 401) {
       //   navigate("/login");
       // }
-      navigate("/login");
+      navigate("/");
       console.log(error.status);
     }
   };
@@ -42,7 +42,7 @@ function Layout() {
         <Navbar />
       </div>
 
-      <main className="flex-1 mt-[64px] mb-[64px] overflow-y-auto bg-blue-200">
+      <main className="flex-1 mt-[64px] mb-[64px] overflow-y-auto bg-[#1a203d]">
         <Outlet />
       </main>
 

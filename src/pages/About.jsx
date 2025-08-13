@@ -58,8 +58,11 @@ function About() {
       ) : (
         <div className="flex justify-center items-center w-full h-72">
           <h1 className="text-black font-semibold text-3xl text-center">
-            `<span className="text-red-600 text-4xl">{user?.username}</span> ,
-            You have no any request till now!`
+            `
+            <span className="text-red-600 text-4xl">
+              {user?.username.charAt(0).toUpperCase() + user?.username.slice(1)}
+            </span>{" "}
+            , You have no any request till now!`
           </h1>
         </div>
       )}
